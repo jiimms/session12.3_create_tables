@@ -1,0 +1,78 @@
+Create two tables under the database “Company”  
+Employees – id,name,title 
+Departments – id,name,location 
+
+d:>sqlite3 company.db
+sqlite> ATTACH DATABASE 'company.db' as 'COMPANY';
+
+sqlite> CREATE TABLE EMPLOYEE(
+   ...> ID INT PRIMARY KEY      NOT NULL,
+   ...> NAME TEXT               NOT NULL,
+   ...> TITLE TEXT              NOT NULL
+   ...> );
+
+CREATE TABLE DEPARTMENT(
+ID INT PRIMARY KEY      NOT NULL,
+NAME TEXT               NOT NULL,
+LOCATION TEXT           NOT NULL
+);
+
+1. Insert 10 more records to Employees table 
+
+		sqlite> INSERT INTO EMPLOYEE VALUES(1, 'JIMMY MANNAN', 'PRESIDENT');
+		sqlite> INSERT INTO EMPLOYEE VALUES(2, 'RAYAAN MANNAN', 'CEO');
+		sqlite> INSERT INTO EMPLOYEE VALUES(3, 'HARRY POTTER', 'CHIEF WIZARD');
+		sqlite> INSERT INTO EMPLOYEE VALUES(4, 'THERESA MAY', 'PLOTTER');
+		sqlite> INSERT INTO EMPLOYEE VALUES(5, 'HARRISON FORD', 'FIREFIGHTER');
+		qlite> INSERT INTO EMPLOYEE VALUES(6, 'quincy larsson', 'developer la monde');
+		sqlite> INSERT INTO EMPLOYEE VALUES(7, 'patryk azan', 'history developer');
+		sqlite> INSERT INTO EMPLOYEE VALUES(8, 'Dr who', 'web developer');
+		sqlite> INSERT INTO EMPLOYEE VALUES(9, 'Atticus Finch', 'conscience developer');
+		sqlite> INSERT INTO EMPLOYEE VALUES(10, 'Aamir khan', 'Moral developer');
+
+		sqlite> select * from employee;
+  
+		1|JIMMY MANNAN|PRESIDENT|18
+		2|RAYAAN MANNAN|CEO|18
+		3|HARRY POTTER|CHIEF WIZARD|18
+		4|THERESA MAY|PLOTTER|18
+		5|HARRISON FORD|FIREFIGHTER|18
+		6|quincy larsson|developer la monde|18
+		7|patryk azan|history developer|18
+		8|Dr who|web developer|18
+		9|Atticus Finch|conscience developer|18
+		10|Aamir khan|Moral developer|18
+
+
+2. Insert 5 more new departments to Departments table 
+		sqlite> SELECT * FROM DEPARTMENT;
+		1|Finance|New Delhi
+		2|HR|New Delhi
+		3|Quality|Gurgaon
+		4|Production|Gurgaon
+		5|Public Relations|New Delhi
+
+
+3. Add new columns age (integer, size 2) as per government laws every employee should be aged above 18. Hence, keep the default value as “18” 
+
+		sqlite> ALTER TABLE EMPLOYEE ADD COLUMN AGE INT DEFAULT 18;
+		sqlite> UPDATE EMPLOYEE SET AGE = 65 WHERE ID =5;
+		sqlite> UPDATE EMPLOYEE SET AGE = 40 WHERE ID =6;
+
+4. From the employees, list out employees who have developer in their title 
+
+	sqlite> select * from employee where title like "%developer%";
+			6|quincy larsson|developer la monde|40
+			7|patryk azan|history developer|18
+			8|Dr who|web developer|18
+			9|Atticus Finch|conscience developer|60
+			10|Aamir khan|Moral developer|48
+
+5. Of the list of employees how many of them are at senior positions? 
+
+	sqlite> SELECT * FROM EMPLOYEE WHERE AGE >= 40
+			1|JIMMY MANNAN|PRESIDENT|45
+			5|HARRISON FORD|FIREFIGHTER|65
+			6|quincy larsson|developer la monde|40
+			9|Atticus Finch|conscience developer|60
+			10|Aamir khan|Moral developer|48
